@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+  
+       <title>JustEat</title>
+
+  </head>
+  <body>
+   
+	<!-- Start of first page: #one -->
+    <div data-role="page" id="one">
+
+	<div data-role="header">
+		<h1>JustEat</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+    
+    
+    	<h2 style="text-align: center">Log Into Your Account</h2>
+
+
+         Username: <input type="text" id="username" name="username"></input>
+		 Password: <input type="password" id="password" name="password"></input>
+  
+    <button id="" class="ui-btn">Login</button>
+	 
+	             To Create An Account Click Below:
+		<p><a href="#two" class="ui-btn ui-shadow ui-corner-all">Sign-Up</a></p>
+        
+     
+		
+	</div><!-- /content -->
+
+	<div data-role="footer" data-theme="a">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page one -->
+
+
+ <!-- Start of second page: #signup -->
+<div data-role="page" id="two" data-theme="a">
+
+	<div data-role="header">
+		<h1>JustEat</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<h2 style="text-align: center">Create An Account</h2>
+		
+		<form method = 'post' action = '/register'>
+		<p>Username: <input type="text" id="username" = name="username"></input></p>
+		<p>E-Mail: <input type="text" id="email" = name="email"></input> </p>
+		<p>Password: <input type="password" id="pass" = name="pass"></input></p>
+		<div class="ui-field-contain"><label for="select-native-2">Account Type</label>
+        <select id="acc_type" name="select-native-2" data-mini="true">
+		<option value></option>
+		<option value="1">Customer</option>
+		<option value="2">Cook</option>
+		</select>
+		</div>
+		<p>Phone Number: <input type="number" id="phoneNo" = name="phoneNo"></input> </p>
+
+
+		<p> <button id="sendData" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Sign-Up</b></p>
+		</form>
+
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page two -->
+
+
+ <!-- Start of home page: #homepage -->
+<div data-role="page" id="homepage" data-theme="a">
+
+	<div data-role="header">
+		<h1>JustEat</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<h2 style="text-align: center">Home Page</h2>
+		
+
+		<p><a href="#three" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Products</a></p>
+
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page two -->
+
+
+  <script>
+  
+  $("#sendData").click(function(e) {
+	console.log("clicked");
+
+	  var un = $("#username").val();
+      var em = $("#email").val();
+	  var pw = $("#pass").val();
+	  var at = $("#acc_type").val();
+	  var pn = $("#phoneNo").val();
+	  
+      $.post( "/register", { username: un, email: em, pass: pw, acc_type: at, phoneNo: pn })
+      .done(function( data ) {
+		alert("your login was successful");
+            alert( "Data Loaded: " + data );
+			
+			$.mobile.changePage("#homepage",{
+			transition: "pop",
+			reverse: false,
+			changeHash: false
+			})
+			
+		
+      });
+  
+  
+  });
+  </script>
+
+
+  </body>
+</html>
+
